@@ -1,9 +1,10 @@
 class Pantry
-  attr_reader :stock, :shopping_list
+  attr_reader :stock, :shopping_list, :cookbook
 
   def initialize
     @stock = {}
     @shopping_list = {}
+    @cookbook = {}
   end
 
   def stock_check(item)
@@ -27,9 +28,17 @@ class Pantry
   end
 
   def print_shopping_list
-    shopping_list.each do |key, value|
+     shopping_list.each do |key, value|
       print "* #{key}: #{value}"
-    end; nil
+    end
+  end
+
+  def add_to_cookbook(recipe)
+    @cookbook.store(recipe.name, recipe.ingredients)
+  end
+
+  def what_can_i_make
+    if cook
   end
 
 end
