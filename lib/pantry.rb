@@ -38,7 +38,25 @@ class Pantry
   end
 
   def what_can_i_make
-    if cook
+      #work in progress, still trying to figure out implementation before refactoring.
+      #method works but have had to hardcode recipes.
+      #would build up previous methods to add new recipes
+      @can_make = []
+    if stock_check("Cheese") >= 20 && stock_check("Flour")
+      @can_make << "Cheese Pizza"
+    elsif stock_check("Brine") >= 10 && stock_check("Cucumbers") >=30
+      @can_make << "Pickles"
+    elsif stock_check("Raw nuts") >= 10 && stock_check("Salt") >=10
+      @can_make << "Peanuts"
+    end
+    @can_make
+  end
+
+  def how_many_can_i_make
+    if what_can_i_make != []
+      recipe_1 = @can_make[0]
+       cookbook[recipe_1].each { |k, v| v % 10}
+    end
   end
 
 end

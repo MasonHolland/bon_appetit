@@ -122,7 +122,33 @@ class PantryTest < Minitest::Test
     pantry.restock("Pickles", 40)
     pantry.restock("Raw nuts", 20)
     pantry.restock("Salt", 20)
+    binding.pry
 
-    assert_equal pantry.what_can_i_make, ["Pickles", "Peanuts"]
+    assert_equal pantry.what_can_i_make, ["Peanuts"]
+  end
+
+  def test_can_check_how_many_i_can_make
+    pantry = Pantry.new
+    r1 = Recipe.new("Cheese Pizza")
+    r1.add_ingredient("Cheese", 20)
+    r1.add_ingredient("Flour", 20)
+    r2 = Recipe.new("Pickles")
+    r2.add_ingredient("Brine", 10)
+    r2.add_ingredient("Cucumbers", 30)
+    r3 = Recipe.new("Peanuts")
+    r3.add_ingredient("Raw nuts", 10)
+    r3.add_ingredient("Salt", 10)
+    pantry.add_to_cookbook(r1)
+    pantry.add_to_cookbook(r2)
+    pantry.add_to_cookbook(r3)
+    pantry.restock("Cheese", 10)
+    pantry.restock("Flour", 20)
+    pantry.restocpak("Brine", 40)
+    pantry.restock("Pickles", 40)
+    pantry.restock("Raw nuts", 20)
+    pantry.restock("Salt", 20)
+
+    assert_equal pantry.what_can_i_make, ["Peanuts"]
+    assert_equal pantry.how_many_can_i_make, {"Peanuts" => 2}
   end
 end
